@@ -1,0 +1,27 @@
+@media (max-width: 991px) {
+    .verCarrito{
+        display: inline-block;
+        position: relative;
+        left: 4px;
+        right: 0px;
+    }
+
+    .titulo-footer{
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    #item-products{
+        display: block;
+    }
+
+    #item-products div{
+        width: 50%;
+        margin-left: 20%;
+        margin-bottom: 25px;
+        line-height: 30px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "img":"img/caño-15-1-4.png" ,
+        "nombre":"caño de cobre 1/4",
+        "category":"caños" ,
+        "precio": 5000 ,
+        "amount":1
+    },
+    {
+        "id": 2,
+        "img":"img/caño-15-3-8.png" ,
+        "nombre": "caño de cobre 3/8",
+        "category":"mensulas" , 
+        "precio": 6000 ,
+        "amount":1
+    },
+    {
+        "id": 3,
+        "img":"img/caño-15-1-2.png" ,
+        "nombre":"caño de cobre 1/2",
+        "category":"caños" ,
+        "precio": 5000 ,
+        "amount":1
+    },
+    {
+        "id": 4, 
+        "img":"img/img1.webp",
+        "nombre": "Manguera Cristal",
+        "category":"manguras" , 
+        "precio": 300 ,
+        "amount":1
+    },
+    {
+        "id": 5,
+        "img":"img/bolsa-sanitizante.png" ,
+        "nombre":"Bolsa Sanitizante",
+        "category":"bolsa" ,
+        "precio": 90000 ,
+        "amount":1
+    },
+    {
+        "id": 6,
+        "img":"img/kit-instalacion1.png" ,
+        "nombre":"kit de Instalacion 1",
+        "category":"kit" ,
+        "precio": 82000 ,
+        "amount":1
+    },
+    {
+        "id": 7,
+        "img":"img/novedades-cable-metro1-5.jpeg" ,
+        "nombre":"Cable 1,5m",
+        "category":"cable" ,
+        "precio": 2000 ,
+        "amount":1
+    },
+    {
+        "id": 8,
+        "img":"img/novedades-cablemetro-2-5.jpeg" ,
+        "nombre":"Cable 2,5m",
+        "category":"cable" ,
+        "precio": 3000 ,
+        "amount":1
+    },
+    {
+        "id": 9,
+        "img":"img/cinta-pvc1.jpeg" ,
+        "nombre":"Cinta PVC",
+        "category":"kit" ,
+        "precio": 3500 ,
+        "amount":1
+    },
+    {
+        "id": 10,
+        "img":"img/tubo-blindado-1-4.png" ,
+        "nombre":"Tubo Blindado",
+        "category":"Cobertor" ,
+        "precio": 5500 ,
+        "amount":1
+    }
+]
