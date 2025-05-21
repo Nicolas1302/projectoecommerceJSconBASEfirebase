@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Agregar Productos</title>
+  <link rel="stylesheet" href="./dashboard.css">
+  <link rel="stylesheet" href="../toastify/toastify.css">
+</head>
+<body>
+  <section>
+    <h1>Dashboard: Agregar Producto</h1>
+    <form id="product-form">
+      <input type="text" id="name" placeholder="Nombre" required>
+      <input type="number" id="price" placeholder="Precio" required>
+      <input type="text" id="category" placeholder="Categoria" required>
+      <input type="text" id="image" placeholder="URL Imagen" required>
+      <input type="text" id="description" placeholder="Descripcion" required>
+      <button type="submit">Agregar</button>
+    </form>
+  </section>
+
+
+  <!-- <button id="logout">Cerrar sesión</button> -->
+  <script type="module" src="dashboard.js"></script>
+  <script src="../toastify/toastify.js"></script>
+</body>
+</html>
