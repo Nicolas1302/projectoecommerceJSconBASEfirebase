@@ -9,6 +9,7 @@ body {
 }
 
 section {
+    width: 500px;
     background: #e2e2e2;
     margin: 40px;
     padding: 40px;
@@ -62,13 +63,28 @@ form {
   gap: 15px;
 }
 
+
+
 form input[type="text"],
 form input[type="number"] {
   padding: 10px;
   border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  
 }
+
+form input[placeholder="Descripcion"]
+ {
+  white-space: initial;
+  height: 70px;
+  
+}
+
+
+
 
 form button {
   background: #00bcd4;
@@ -119,4 +135,81 @@ form button {
 
 input.error {
   border: 2px solid red;
+}
+
+/* css de los Productos */
+
+#item-products{
+    margin-top: 40px;
+    width: 500px;
+	display: block;
+	flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#item-products div{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    color: rgb(138, 137, 137);
+    align-items: center;
+    height: 100px;
+    width: 500px;
+    margin: 10px;
+    background-color: #acd8f7;
+}
+
+.productoAgregar {
+    width: 100%;
+}
+
+.restar {
+    cursor: pointer;
+}
+
+.sumar {
+    cursor: pointer;
+}
+
+
+#item-products div h3{
+    font-size: 15px;
+    text-align: center;
+    width: 200px;
+}
+
+#item-products div img{
+    height: 50%;
+    
+}
+
+#itemListProduc-section{
+    border: solid 1px black;
+    background-color: beige;
+    margin-top: 40px;
+    width: 100%;
+	display: flex;
+    flex-direction: column;
+	flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#itemListProduc-section div .Items-Cart{
+    border: solid 3px black;
+    width: 70%;
+    margin-top: 30px;
+	margin-left: 3%;
+	margin-bottom: 25px;
+    line-height: 30px;
+    font-size: 12px;
+
+	display: flex;
+	align-items: center;
+    justify-content: space-between;
+}
+
+#itemListProduc-section div img{
+    width: 10%;
 }

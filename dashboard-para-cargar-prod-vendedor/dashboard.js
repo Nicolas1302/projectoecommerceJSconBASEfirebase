@@ -1,6 +1,7 @@
 import { app, db } from "../firebase-config.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // const auth = getAuth(app);
 
@@ -52,6 +53,8 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
+
+
 // document.getElementById('logout').addEventListener('click', async () => {
 //   try {
 //     await signOut(auth);
@@ -60,3 +63,37 @@ form.addEventListener('submit', async (e) => {
 //     alert("Error al cerrar sesión.");
 //   }
 // });
+
+
+//Productos que tenemos cargados
+
+let cartProducts = []; 
+let contenedor = document.getElementById("item-products")
+
+const getProductos = async () => {      /*la promesa que toma los elemento de data.json*/
+    const response = await getDocs(collection(db, "productos"));
+    const datas =  response.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    //const data = JSON.stringify(datas);
+    console.log(datas);
+    //console.log(data);
+
+
+    datas.forEach((producto) => {
+        let contenedor1 = document.createElement("div") /* creo el Div que Contiene el Producto */
+        contenedor1.className = "cartProductos" /* le agrego una clase para dar estilo */
+        contenedor1.innerHTML = /*`<span>ID: ${producto.id}</span>*/
+                                `<img src="${producto.image}" alt="">
+                                <h3>${producto.name}</h3>
+                                <h4>$${producto.price}</h4>`
+        contenedor.append(contenedor1) /* inserto el producto en el DOM */
+    
+        
+        let addButton = document.createElement("button") /* creo el Boton agregar */
+        addButton.innerText = "Agregar";
+        addButton.className = "productoAgregar btn btn-secondary"
+    
+        contenedor1.append(addButton)  /* inserto el boton en el producto */
+    });
+}    
+
+getProductos();
