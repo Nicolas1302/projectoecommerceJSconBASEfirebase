@@ -1,23 +1,26 @@
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #e2e2e2 50%, #6600cc 50%);
-  display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  align-content: center;
+  
 }
 
-@media (max-width: 991px) {
-    body {
-      display: block;
-      margin: auto;
-    }
 
+
+.seccion-agregar-producto {
+  position: relative;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  
 }
 
 section {
     width: 500px;
+    min-height: 250px;
     background: #e2e2e2;
     margin: 40px;
     padding: 40px;
@@ -27,13 +30,7 @@ section {
     box-shadow: -10px 10px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 19px 15px rgba(0,0,0,0);
 }
 
-@media (max-width: 991px) {
-    section {
-      display: block;
-      
-    }
 
-}
 
 
 .form-container {
@@ -156,14 +153,6 @@ input.error {
 
 /* css de los Productos */
 
-#item-products{
-    margin-top: 40px;
-    width: 500px;
-	display: block;
-	flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
 
 #item-products div{
     display: flex;
@@ -172,14 +161,14 @@ input.error {
     color: rgb(138, 137, 137);
     align-items: center;
     height: 40px;
-    width: 500px;
+    width: auto;
     margin: 10px;
     background-color: #acd8f7;
     border: 1px solid #1C6EA4;
     border-radius: 40px;
 }
 
-.productoAgregar {
+.productoEliminar {
   width: 20%;
   margin: 5px;
   border: 1px solid #1C6EA4;
@@ -200,7 +189,7 @@ input.error {
 #item-products div h3{
     font-size: 15px;
     text-align: center;
-    width: 200px;
+    width: auto;
 }
 
 #item-products div img{
@@ -239,4 +228,19 @@ input.error {
 
 #itemListProduc-section div img{
     width: 10%;
+}
+
+@media (max-width: 991px) {
+
+    .seccion-agregar-producto {
+      display: block;
+      justify-self: center;
+      width: 100%;
+    }
+
+    section {
+    width: 80%;
+    }
+    
+
 }

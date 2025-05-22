@@ -1,8 +1,7 @@
 import { app, db } from "../firebase-config.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-import { getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
+import { getDocs, deleteDoc, doc  } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 // const auth = getAuth(app);
 
 // onAuthStateChanged(auth, (user) => {
@@ -29,7 +28,7 @@ form.addEventListener('submit', async (e) => {
     //alert("Producto agregado 🎉");
     //notificacion de Toastify
     Toastify({                                                  // se crea la notificacion de que agregaste Producto al Carrito
-      text: "Agregaste " + [name] + " a tu Pagina",
+      text: "Agregaste " + name + " a tu Pagina",
       duration: 5000,
       gravity: "top", // `top` or `bottom`
       position: "center", // `left`, `center` or `right`
@@ -39,6 +38,9 @@ form.addEventListener('submit', async (e) => {
     }).showToast();
     //se resetea el Formulario
     form.reset();
+    setTimeout(() => {
+      location.reload()
+    }, "1000");
   } catch (err) {
     //alert("Error al agregar.");
     Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
@@ -89,11 +91,53 @@ const getProductos = async () => {      /*la promesa que toma los elemento de da
     
         
         let addButton = document.createElement("button") /* creo el Boton agregar */
-        addButton.innerText = "Agregar";
-        addButton.className = "productoAgregar btn btn-secondary"
+        addButton.innerText = "Eliminar";
+        addButton.className = "productoEliminar"
     
         contenedor1.append(addButton)  /* inserto el boton en el producto */
+
+
+        let eliminar = contenedor1.querySelector(".productoEliminar")
+        eliminar.addEventListener("click", () => {
+            // Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
+            //     text: "Eliminaste "+[products.nombre]+" del Carrito",
+            //     duration: 4000,
+            //     gravity: "top", // `top` or `bottom`
+            //     position: "right", // `left`, `center` or `right`
+            //     style: {
+            //         background: "linear-gradient(to top, #ee0979, #ff6a00)",
+            //     },
+            // }).showToast()
+            //console.log(producto.id); //se prueba que id selecciona
+            eliminarProducto(producto.id);
+            
+        })
+
     });
 }    
 
 getProductos();
+
+async function eliminarProducto(productoId) {
+  const documentRef = doc(db, "productos", productoId);
+  console.log(productoId)
+  // Delete the document
+  try {
+    await deleteDoc(documentRef);
+    console.log("Document successfully deleted!");
+    Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
+      text: "Eliminaste del Carrito",
+      duration: 4000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      style: {
+        background: "linear-gradient(to top, #ee0979, #ff6a00)",
+      },
+    }).showToast()
+    setTimeout(() => {
+      location.reload()
+    }, "2000");
+  } catch (error) {
+    console.error("Error deleting document:", error);
+  }
+}
