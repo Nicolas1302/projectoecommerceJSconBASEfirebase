@@ -1,5 +1,5 @@
 import { app, db } from "../firebase-config.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getDocs, deleteDoc, doc  } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 // const auth = getAuth(app);
@@ -21,6 +21,7 @@ form.addEventListener('submit', async (e) => {
   const category = document.getElementById('category').value;
   const image = document.getElementById('image').value;
   const description = document.getElementById('description').value;
+  limpiarProductos();
   
 
   try {
@@ -38,9 +39,9 @@ form.addEventListener('submit', async (e) => {
     }).showToast();
     //se resetea el Formulario
     form.reset();
-    setTimeout(() => {
-      location.reload()
-    }, "1000");
+    // setTimeout(() => {
+    //   location.reload()
+    // }, "1000");
   } catch (err) {
     //alert("Error al agregar.");
     Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
@@ -56,6 +57,9 @@ form.addEventListener('submit', async (e) => {
 });
 
 
+function limpiarProductos(){
+  contenedor.innerHTML ='<h1>Productos</h1>';
+}
 
 // document.getElementById('logout').addEventListener('click', async () => {
 //   try {
@@ -73,21 +77,23 @@ let cartProducts = [];
 let contenedor = document.getElementById("item-products")
 
 const getProductos = async () => {      /*la promesa que toma los elemento de data.json*/
-    const response = await getDocs(collection(db, "productos"));
-    const datas =  response.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    onSnapshot(collection(db, "productos"),(dato) => {
+    //const response = await getDocs(collection(db, "productos"));
+    //response.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     //const data = JSON.stringify(datas);
-    console.log(datas);
     //console.log(data);
+    
+    //console.log(contenedor1);
 
-
-    datas.forEach((producto) => {
+    dato.forEach((producto) => {
+        let productos = producto.data();
         let contenedor1 = document.createElement("div") /* creo el Div que Contiene el Producto */
         contenedor1.className = "cartProductos" /* le agrego una clase para dar estilo */
         contenedor1.innerHTML = /*`<span>ID: ${producto.id}</span>*/
-                                `<img src="${producto.image}" alt="">
-                                <h3>${producto.name}</h3>
-                                <h4>$${producto.price}</h4>`
-        contenedor.append(contenedor1) /* inserto el producto en el DOM */
+                                `<img src="${productos.image}" alt="">
+                                <h3>${productos.name}</h3>
+                                <h4>$${productos.price}</h4>`
+        contenedor.append(contenedor1); /* inserto el producto en el DOM */
     
         
         let addButton = document.createElement("button") /* creo el Boton agregar */
@@ -109,34 +115,33 @@ const getProductos = async () => {      /*la promesa que toma los elemento de da
             //     },
             // }).showToast()
             //console.log(producto.id); //se prueba que id selecciona
-            eliminarProducto(producto.id);
+            eliminarProducto(producto.id); //id selecciona para eliminar para luego pasar a la funcion eliminar producto
+            limpiarProductos(); // aca limpiamos la seccion de Productos para que onsnapshot lo vuelva a cargar
             
         })
 
     });
-}    
+  });   
+}; 
 
 getProductos();
 
 async function eliminarProducto(productoId) {
-  const documentRef = doc(db, "productos", productoId);
-  console.log(productoId)
+  const documentRef = doc(db, "productos", productoId); //se selcciona la base de Datos, productos que es la seleccion , el id a liminar
+  console.log(productoId) //se prueba que id seleccionada
   // Delete the document
   try {
-    await deleteDoc(documentRef);
-    console.log("Document successfully deleted!");
-    Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
+    await deleteDoc(documentRef); //codigo de Firebase para eliminar el producto
+    //console.log("Document successfully deleted!");
+    Toastify({                                                  
       text: "Eliminaste del Carrito",
       duration: 4000,
-      gravity: "top", // `top` or `bottom`
+      gravity: "top", // `top` or `bottom`                  /*se crea la notificacion del evento que elimina elementos del carrito */
       position: "right", // `left`, `center` or `right`
       style: {
         background: "linear-gradient(to top, #ee0979, #ff6a00)",
       },
-    }).showToast()
-    setTimeout(() => {
-      location.reload()
-    }, "2000");
+    })
   } catch (error) {
     console.error("Error deleting document:", error);
   }
